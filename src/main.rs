@@ -13,6 +13,7 @@ fn main() {
         match n {
             1 => println!("[{}] answer: {}", n, problem001::solve()),
             2 => println!("[{}] answer: {}", n, problem002::solve()),
+            3 => println!("[{}] answer: {}", n, problem003::solve()),
             _ => println!("{} is an unsolved problem", n),
         }
     }
