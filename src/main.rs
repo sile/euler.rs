@@ -11,9 +11,10 @@ fn main() {
     } else {
         let n: usize = args[1].parse().unwrap();
         match n {
-            1 => println!("[{}] answer: {}", n, problem001::solve()),
-            2 => println!("[{}] answer: {}", n, problem002::solve()),
-            3 => println!("[{}] answer: {}", n, problem003::solve()),
+            1 => println!("[{}] answer: {:?}", n, problem001::solve()),
+            2 => println!("[{}] answer: {:?}", n, problem002::solve()),
+            3 => println!("[{}] answer: {:?}", n, problem003::solve()),
+            4 => println!("[{}] answer: {:?}", n, problem004::solve()),
             _ => println!("{} is an unsolved problem", n),
         }
     }
