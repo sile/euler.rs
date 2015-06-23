@@ -10,5 +10,5 @@ use utils::Sum;
 
 pub fn solve() -> usize {
     let limit = 1000;
-    (1..limit).filter(|n| n % 3 == 0 || n % 5 == 0).sumation()
+    (1..limit).filter(|n| n % 3 == 0 || n % 5 == 0).summation()
 }

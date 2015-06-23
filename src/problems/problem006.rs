@@ -15,5 +15,5 @@ extern crate num;
 use utils::Sum;
 
 pub fn solve() -> usize {
-    num::pow((1..101).sumation(), 2) - (1..101).map(|n| num::pow(n,2)).sumation()
+    num::pow((1..101).summation(), 2) - (1..101).map(|n| num::pow(n,2)).summation()
 }

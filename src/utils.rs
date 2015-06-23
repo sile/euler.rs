@@ -54,11 +54,11 @@ pub fn primes() -> Prime {
 }
 
 pub trait Sum<T> {
-    fn sumation(self) -> T;
+    fn summation(self) -> T;
 }
 
 impl<T,O> Sum<O> for T where T: Iterator<Item=O>, O: Add + num::Zero {
-    fn sumation(self) -> O {
+    fn summation(self) -> O {
         self.fold(num::zero(), |a,b| a+b)
     }
 }
