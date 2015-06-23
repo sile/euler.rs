@@ -10,8 +10,9 @@
 extern crate num;
 use self::num::integer::Integer;
 use utils;
+use utils::Sum;
 
 pub fn solve() -> usize {
     let limit = 4_000_000;
-    utils::fibonacci().take_while(|&n| n <= limit).filter(|n| n.is_even()).fold(0, |a,b| a+b )
+    utils::fibonacci().take_while(|&n| n <= limit).filter(|n| n.is_even()).sumation()
 }

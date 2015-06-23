@@ -1,3 +1,7 @@
+extern crate num;
+
+use std::ops::Add;
+
 pub struct Fibonacci {
     curr: usize,
     next: usize,
@@ -47,4 +51,14 @@ impl Prime {
 
 pub fn primes() -> Prime {
     Prime{curr: 2, primes: Vec::new()}
+}
+
+pub trait Sum<T> {
+    fn sumation(self) -> T;
+}
+
+impl<T,O> Sum<O> for T where T: Iterator<Item=O>, O: Add + num::Zero {
+    fn sumation(self) -> O {
+        self.fold(num::zero(), |a,b| a+b)
+    }
 }
