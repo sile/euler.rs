@@ -23,41 +23,63 @@ pub fn fibonacci() -> Fibonacci {
     Fibonacci {curr: 1, next: 1}
 }
 
-#[derive(PartialOrd,PartialEq,Ord,Eq)]
-struct CompositeNum {
-    num: i64, // NOTE: BinaryHeapで、小さい値ほど優先度を高くしたいので、値を負数で持つようにする
+use std::cmp::PartialOrd;
+use std::cmp::Ordering;
+
+#[derive(PartialEq,Eq,Ord)]
+struct Num {
+    val: u64,
     prime: u64,
 }
 
+impl PartialOrd for Num {
+    fn partial_cmp(&self, other: &Num) -> Option<Ordering> {
+        if      self.val < other.val { return Some(Ordering::Greater) }
+        else if self.val > other.val { return Some(Ordering::Less) }
+        else                         { return Some(Ordering::Equal) }
+    }
+}
+
 pub struct Prime {
-    curr: u64,
-    composite_nums: BinaryHeap<CompositeNum>,
+    nums: BinaryHeap<Num>,
+}
+
+impl Prime {
+    pub fn push_next_prime(&mut self, prime: u64) {
+        self.nums.push(Num{val: prime, prime: prime});
+    }
+    pub fn pop_next_prime(&mut self) -> u64 {
+        self.pop_and_repush().val
+    }
+    pub fn is_prime(&mut self, n: u64) -> bool {
+        if n < self.nums.peek().unwrap().val {
+            true
+        } else {
+            while n == self.nums.peek().unwrap().val { self.pop_and_repush(); };
+            false
+        }
+    }
+    fn pop_and_repush(&mut self) -> Num {
+        let num = self.nums.pop().unwrap();
+        self.nums.push(Num{val: num.val + num.prime, prime: num.prime});
+        num
+    }
 }
 
 impl Iterator for Prime {
     type Item = u64;
-
     fn next(&mut self) -> Option<u64> {
-        let prime = self.curr;
-
-        self.composite_nums.push(CompositeNum{num: -((prime+prime) as i64), prime: prime});
-        loop {
-            self.curr += 1;
-            let next_composite_num = num::abs(self.composite_nums.peek().unwrap().num) as u64;
-            if self.curr < next_composite_num { break }
-
-            while self.curr == num::abs(self.composite_nums.peek().unwrap().num) as u64 {
-                let mut composite_num = self.composite_nums.pop().unwrap();
-                composite_num.num -= composite_num.prime as i64;
-                self.composite_nums.push(composite_num);
-            }
-        }
+        let prime = self.pop_next_prime();
+        let next = (prime+1..).find(|n| self.is_prime(*n) ).unwrap();
+        self.push_next_prime(next);
         Some(prime)
     }
 }
 
 pub fn primes() -> Prime {
-    Prime{curr: 2, composite_nums: BinaryHeap::new()}
+    let mut p = Prime{nums: BinaryHeap::new()};
+    p.push_next_prime(2);
+    p
 }
 
 pub trait Sum<T> {
