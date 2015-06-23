@@ -1,7 +1,7 @@
 extern crate num;
 
 use std::ops::Add;
-use std::collections::BinaryHeap;
+use std::collections::HashMap;
 
 pub struct Fibonacci {
     curr: usize,
@@ -23,63 +23,34 @@ pub fn fibonacci() -> Fibonacci {
     Fibonacci {curr: 1, next: 1}
 }
 
-use std::cmp::PartialOrd;
-use std::cmp::Ordering;
-
-#[derive(PartialEq,Eq,Ord)]
-struct Num {
-    val: u64,
-    prime: u64,
-}
-
-impl PartialOrd for Num {
-    fn partial_cmp(&self, other: &Num) -> Option<Ordering> {
-        if      self.val < other.val { return Some(Ordering::Greater) }
-        else if self.val > other.val { return Some(Ordering::Less) }
-        else                         { return Some(Ordering::Equal) }
-    }
-}
-
 pub struct Prime {
-    nums: BinaryHeap<Num>,
+    curr: u64,
+    sieve: HashMap<u64, u64>, // composite_number => prime_number
 }
 
 impl Prime {
-    pub fn push_next_prime(&mut self, prime: u64) {
-        self.nums.push(Num{val: prime, prime: prime});
-    }
-    pub fn pop_next_prime(&mut self) -> u64 {
-        self.pop_and_repush().val
-    }
     pub fn is_prime(&mut self, n: u64) -> bool {
-        if n < self.nums.peek().unwrap().val {
-            true
-        } else {
-            while n == self.nums.peek().unwrap().val { self.pop_and_repush(); };
-            false
+        match self.sieve.remove(&n) {
+            None        => {self.mark_composite(2, n);               true},  // prime number
+            Some(prime) => {self.mark_composite(n/prime + 1, prime); false}, // composite number
         }
     }
-    fn pop_and_repush(&mut self) -> Num {
-        let num = self.nums.pop().unwrap();
-        self.nums.push(Num{val: num.val + num.prime, prime: num.prime});
-        num
+    fn mark_composite(&mut self, times: u64, prime: u64) {
+        (times..).find(|i| !self.sieve.contains_key(&(i*prime)) ).and_then(|i| self.sieve.insert(i*prime, prime) );
     }
 }
 
 impl Iterator for Prime {
     type Item = u64;
     fn next(&mut self) -> Option<u64> {
-        let prime = self.pop_next_prime();
-        let next = (prime+1..).find(|n| self.is_prime(*n) ).unwrap();
-        self.push_next_prime(next);
+        let prime = (self.curr..).find(|n| self.is_prime(*n) ).unwrap();
+        self.curr = prime + 1;
         Some(prime)
     }
 }
 
 pub fn primes() -> Prime {
-    let mut p = Prime{nums: BinaryHeap::new()};
-    p.push_next_prime(2);
-    p
+    Prime{curr: 2, sieve: HashMap::new()}
 }
 
 pub trait Sum<T> {
