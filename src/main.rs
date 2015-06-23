@@ -11,16 +11,17 @@ fn main() {
     } else {
         let n: usize = args[1].parse().unwrap();
         match n {
-            1 => println!("[{}] answer: {:?}", n, problem001::solve()),
-            2 => println!("[{}] answer: {:?}", n, problem002::solve()),
-            3 => println!("[{}] answer: {:?}", n, problem003::solve()),
-            4 => println!("[{}] answer: {:?}", n, problem004::solve()),
-            5 => println!("[{}] answer: {:?}", n, problem005::solve()),
-            6 => println!("[{}] answer: {:?}", n, problem006::solve()),
-            7 => println!("[{}] answer: {:?}", n, problem007::solve()),
-            8 => println!("[{}] answer: {:?}", n, problem008::solve()),
-            9 => println!("[{}] answer: {:?}", n, problem009::solve()),
-            _ => println!("{} is an unsolved problem", n),
+              1 => println!("[{}] answer: {:?}", n, problem001::solve()),
+              2 => println!("[{}] answer: {:?}", n, problem002::solve()),
+              3 => println!("[{}] answer: {:?}", n, problem003::solve()),
+              4 => println!("[{}] answer: {:?}", n, problem004::solve()),
+              5 => println!("[{}] answer: {:?}", n, problem005::solve()),
+              6 => println!("[{}] answer: {:?}", n, problem006::solve()),
+              7 => println!("[{}] answer: {:?}", n, problem007::solve()),
+              8 => println!("[{}] answer: {:?}", n, problem008::solve()),
+              9 => println!("[{}] answer: {:?}", n, problem009::solve()),
+             10 => println!("[{}] answer: {:?}", n, problem010::solve()),
+              _ => println!("{} is an unsolved problem", n),
         }
     }
 }
