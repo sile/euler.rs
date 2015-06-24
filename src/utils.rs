@@ -1,6 +1,6 @@
 extern crate num;
 
-use std::ops::Add;
+use std::ops::{Add,Mul};
 use std::collections::HashMap;
 
 pub struct Fibonacci {
@@ -60,5 +60,15 @@ pub trait Sum<T> {
 impl<T,O> Sum<O> for T where T: Iterator<Item=O>, O: Add + num::Zero {
     fn summation(self) -> O {
         self.fold(num::zero(), |a,b| a+b)
+    }
+}
+
+pub trait Product<T> {
+    fn prod(self) -> T;
+}
+
+impl<T,O> Product<O> for T where T: Iterator<Item=O>, O: Mul + num::One {
+    fn prod(self) -> O {
+        self.fold(num::one(), |a,b| a*b)
     }
 }

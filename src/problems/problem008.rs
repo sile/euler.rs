@@ -28,6 +28,8 @@
 //!
 //! Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 //! ```
+use utils::Product;
+
 pub fn solve() -> usize {
     let digits: [usize; 1000] =
         [7,3,1,6,7,1,7,6,5,3,1,3,3,0,6,2,4,9,1,9,2,2,5,1,1,9,6,7,4,4,2,6,5,7,4,7,4,2,3,5,5,3,4,9,1,9,4,9,3,4,
@@ -51,5 +53,5 @@ pub fn solve() -> usize {
          0,5,8,8,6,1,1,6,4,6,7,1,0,9,4,0,5,0,7,7,5,4,1,0,0,2,2,5,6,9,8,3,1,5,5,2,0,0,0,5,5,9,3,5,7,2,9,7,2,5,
          7,1,6,3,6,2,6,9,5,6,1,8,8,2,6,7,0,4,2,8,2,5,2,4,8,3,6,0,0,8,2,3,2,5,7,5,3,0,4,2,0,7,5,2,9,6,3,4,5,0];
     let range = 13;
-    (0..digits.len()-range).map(|i| digits[i..i+range].iter().fold(1, |a,b| a*b ) ).max().unwrap()
+    (0..digits.len()-range).map(|i| (i..i+range).map(|j| digits[j] ).prod() ).max().unwrap()
 }
