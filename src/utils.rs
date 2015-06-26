@@ -72,3 +72,36 @@ impl<T,O> Product<O> for T where T: Iterator<Item=O>, O: Mul + num::One {
         self.fold(num::one(), |a,b| a*b)
     }
 }
+
+pub struct Divisor {
+    dividend: usize,
+    curr: usize,
+    buff: Option<usize>,
+}
+
+impl Iterator for Divisor {
+    type Item = usize;
+    fn next(&mut self) -> Option<usize> {
+        if let Some(n) = self.buff {
+            self.buff = None;
+            return Some(n);
+        }
+        while self.dividend % self.curr != 0 {
+            self.curr += 1;
+        }
+        if self.curr * self.curr > self.dividend {
+            return None;
+        }
+        let x = self.curr;
+        let y = self.dividend / x;
+        self.curr += 1;
+        if x != y {
+            self.buff = Some(y);
+        }
+        Some(x)
+    }
+}
+
+pub fn divisors(dividend: usize) -> Divisor {
+    Divisor{dividend: dividend, curr: 2, buff: Some(1)}
+}
