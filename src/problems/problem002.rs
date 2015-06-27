@@ -14,5 +14,5 @@ use utils::Sum;
 
 pub fn solve() -> usize {
     let limit = 4_000_000;
-    utils::fibonacci().take_while(|&n| n <= limit).filter(|n| n.is_even()).summation()
+    utils::fibonacci::<usize>().take_while(|&n| n <= limit).filter(|n| n.is_even()).summation()
 }

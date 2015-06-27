@@ -3,24 +3,24 @@ extern crate num;
 use std::ops::{Add,Mul};
 use std::collections::HashMap;
 
-pub struct Fibonacci {
-    curr: usize,
-    next: usize,
+pub struct Fibonacci<T> {
+    curr: T,
+    next: T,
 }
 
-impl Iterator for Fibonacci {
-    type Item = usize;
+impl<T: Add<Output=T>+num::One+Clone> Iterator for Fibonacci<T> {
+    type Item = T;
 
-    fn next(&mut self) -> Option<usize> {
-        let new_next = self.curr + self.next;
-        self.curr = self.next;
+    fn next(&mut self) -> Option<T> {
+        let new_next = self.curr.clone() + self.next.clone();
+        self.curr = self.next.clone();
         self.next = new_next;
-        Some(self.curr)
+        Some(self.curr.clone())
     }
 }
 
-pub fn fibonacci() -> Fibonacci {
-    Fibonacci {curr: 1, next: 1}
+pub fn fibonacci<T: num::One>() -> Fibonacci<T> {
+    Fibonacci {curr: num::one(), next: num::one()}
 }
 
 pub struct Prime {
