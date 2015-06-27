@@ -19,3 +19,4 @@ pub mod problem018;
 pub mod problem019;
 pub mod problem020;
 pub mod problem021;
+pub mod problem022;
