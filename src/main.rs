@@ -36,6 +36,7 @@ fn main() {
             23  => println!("[{}] answer: {:?}", n, problem023::solve()),
             24  => println!("[{}] answer: {:?}", n, problem024::solve()),
             25  => println!("[{}] answer: {:?}", n, problem025::solve()),
+            26  => println!("[{}] answer: {:?}", n, problem026::solve()),
             _   => println!("{} is an unsolved problem", n),
         }
     }
