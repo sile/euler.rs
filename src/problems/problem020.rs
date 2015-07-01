@@ -12,15 +12,9 @@
 //! ```
 extern crate num;
 use self::num::bigint::BigUint;
-use self::num::FromPrimitive;
-use self::num::One;
-use utils::Sum;
+use utils::{self,Sum};
 
 pub fn solve() -> u32 {
     let num = 100;
-    format!("{}", factorial(num)).chars().map(|c| c.to_digit(10).unwrap() ).summation()
-}
-
-fn factorial(n: usize) -> BigUint {
-    (1..n+1).fold(BigUint::one(), |a,b| a * BigUint::from_usize(b).unwrap() )
+    format!("{}", utils::factorial::<BigUint>(num)).chars().map(|c| c.to_digit(10).unwrap() ).summation()
 }

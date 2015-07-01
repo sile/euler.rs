@@ -11,7 +11,7 @@
 //!
 //! What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 //! ```
-use utils::Product;
+use utils;
 
 pub fn solve() -> usize {
     let v = b"0123456789";
@@ -22,7 +22,7 @@ pub fn solve() -> usize {
 fn nth_permutation(v: &[u8], mut nth: usize) -> Vec<usize> {
     let mut r = Vec::new();
     for i in 0..v.len() {
-        let f = factorial(v.len() - i - 1);
+        let f = utils::factorial(v.len() - i - 1);
         for j in 0..v.len() {
             if r.contains(&j) {
                 continue;
@@ -35,8 +35,4 @@ fn nth_permutation(v: &[u8], mut nth: usize) -> Vec<usize> {
         }
     }
     r
-}
-
-fn factorial(n: usize) -> usize {
-    (2..n+1).prod()
 }

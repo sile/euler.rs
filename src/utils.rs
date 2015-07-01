@@ -2,13 +2,14 @@ extern crate num;
 
 use std::ops::{Add,Mul};
 use std::collections::HashMap;
+use self::num::{One,Zero};
 
 pub struct Fibonacci<T> {
     curr: T,
     next: T,
 }
 
-impl<T: Add<Output=T>+num::One+Clone> Iterator for Fibonacci<T> {
+impl<T: Add<Output=T>+One+Clone> Iterator for Fibonacci<T> {
     type Item = T;
 
     fn next(&mut self) -> Option<T> {
@@ -19,7 +20,7 @@ impl<T: Add<Output=T>+num::One+Clone> Iterator for Fibonacci<T> {
     }
 }
 
-pub fn fibonacci<T: num::One>() -> Fibonacci<T> {
+pub fn fibonacci<T: One>() -> Fibonacci<T> {
     Fibonacci {curr: num::one(), next: num::one()}
 }
 
@@ -57,7 +58,7 @@ pub trait Sum<T> {
     fn summation(self) -> T;
 }
 
-impl<T,O> Sum<O> for T where T: Iterator<Item=O>, O: Add + num::Zero {
+impl<T,O> Sum<O> for T where T: Iterator<Item=O>, O: Add + Zero {
     fn summation(self) -> O {
         self.fold(num::zero(), |a,b| a+b)
     }
@@ -67,7 +68,7 @@ pub trait Product<T> {
     fn prod(self) -> T;
 }
 
-impl<T,O> Product<O> for T where T: Iterator<Item=O>, O: Mul + num::One {
+impl<T,O> Product<O> for T where T: Iterator<Item=O>, O: Mul + One {
     fn prod(self) -> O {
         self.fold(num::one(), |a,b| a*b)
     }
@@ -104,4 +105,14 @@ impl Iterator for Divisor {
 
 pub fn divisors(dividend: usize) -> Divisor {
     Divisor{dividend: dividend, curr: 2, buff: Some(1)}
+}
+
+pub fn factorial<T: One+Add<Output=T>+Mul+Clone>(i: usize) -> T {
+    let mut n: T = num::one();
+    let mut c: T = num::one();
+    for _ in (0..i) {
+        n = n * c.clone();
+        c = c + num::one();
+    }
+    n
 }
