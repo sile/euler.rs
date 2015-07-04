@@ -1,8 +1,8 @@
 extern crate num;
 
-use std::ops::{Add,Mul};
+use std::ops::{Add,Mul,Div};
 use std::collections::HashMap;
-use self::num::{One,Zero};
+use self::num::{One,Zero,FromPrimitive};
 
 pub struct Fibonacci<T> {
     curr: T,
@@ -115,4 +115,14 @@ pub fn factorial<T: One+Add<Output=T>+Mul+Clone>(i: usize) -> T {
         c = c + num::one();
     }
     n
+}
+
+pub fn digits<T: FromPrimitive+Div<Output=T>+Zero+Eq+Clone>(mut n: T) -> usize {
+    let mut d = 0;
+    let ten = T::from_u8(10).unwrap();
+    while n != num::zero() {
+        n = n / ten.clone();
+        d += 1
+    }
+    d
 }
