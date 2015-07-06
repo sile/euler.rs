@@ -1,5 +1,8 @@
 extern crate num;
 
+use std::path::Path;
+use std::fs::File;
+use std::io::Read;
 use std::ops::{Add,Mul,Div};
 use std::collections::HashMap;
 use self::num::{One,Zero,FromPrimitive};
@@ -134,4 +137,16 @@ pub fn int_to_digits(mut n: usize) -> Vec<usize> {
         n /= 10;
     }
     v
+}
+
+pub fn load_names(filename: &str) -> Vec<String> {
+    let mut names = Vec::new();
+    let mut f = File::open(Path::new(filename)).unwrap();
+    let mut s = String::new();
+
+    f.read_to_string(&mut s).unwrap();
+    for token in s.split(',') {
+        names.push(token.trim_matches('"').to_string());
+    }
+    names
 }

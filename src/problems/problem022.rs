@@ -13,28 +13,12 @@
 //!
 //! What is the total of all the name scores in the file?
 //! ```
-//use utils::{self, Sum};
-use std::path::Path;
-use std::fs::File;
-use std::io::Read;
-use utils::Sum;
+use utils::{self,Sum};
 
 pub fn solve() -> usize {
-    let mut names = load_names("data/p022_names.txt");
+    let mut names = utils::load_names("data/p022_names.txt");
     names.sort_by(|a,b| a.cmp(b) );
     names.iter().zip(1..).map(|(name,i)| score(i,name)).summation()
-}
-
-fn load_names(filename: &str) -> Vec<String> {
-    let mut names = Vec::new();
-    let mut f = File::open(Path::new(filename)).unwrap();
-    let mut s = String::new();
-
-    f.read_to_string(&mut s).unwrap();
-    for token in s.split(',') {
-        names.push(token.trim_matches('"').to_string());
-    }
-    names
 }
 
 fn score(rank: usize, name: &str) -> usize {
