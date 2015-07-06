@@ -16,23 +16,5 @@ use utils;
 pub fn solve() -> usize {
     let v = b"0123456789";
     let nth = 1_000_000;
-    nth_permutation(v, nth - 1).iter().fold(0, |a,&b| a*10+b)
-}
-
-fn nth_permutation(v: &[u8], mut nth: usize) -> Vec<usize> {
-    let mut r = Vec::new();
-    for i in 0..v.len() {
-        let f = utils::factorial(v.len() - i - 1);
-        for j in 0..v.len() {
-            if r.contains(&j) {
-                continue;
-            }
-            if nth < f {
-                r.push(j);
-                break;
-            }
-            nth -= f;
-        }
-    }
-    r
+    utils::nth_permutation(v, nth - 1).unwrap().iter().fold(0, |a,&b| a*10+b as usize)
 }

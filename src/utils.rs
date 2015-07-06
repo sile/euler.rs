@@ -150,3 +150,25 @@ pub fn load_names(filename: &str) -> Vec<String> {
     }
     names
 }
+
+pub fn nth_permutation(v: &[u8], mut nth: usize) -> Option<Vec<u8>> {
+    let mut r = Vec::new();
+    for i in 0..v.len() {
+        let f = factorial(v.len() - i - 1);
+        for j in 0..(v.len() as u8) {
+            if r.contains(&j) {
+                continue;
+            }
+            if nth < f {
+                r.push(j);
+                break;
+            }
+            nth -= f;
+        }
+    }
+    if v.len() == r.len() { Some(r) } else { None }
+}
+
+pub fn digits_to_int(v: &[u8]) -> usize {
+    v.iter().fold(0, |a,&b| a * 10 + b as usize)
+}
