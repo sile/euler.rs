@@ -5,6 +5,7 @@ use std::fs::File;
 use std::io::Read;
 use std::ops::{Add,Mul,Div};
 use std::collections::HashMap;
+use std::iter::Peekable;
 use self::num::{One,Zero,FromPrimitive};
 
 pub struct Fibonacci<T> {
@@ -55,6 +56,28 @@ impl Iterator for Prime {
 
 pub fn primes() -> Prime {
     Prime{curr: 2, sieve: HashMap::new()}
+}
+
+pub struct Composite {
+    curr:   u64,
+    primes: Peekable<Prime>,
+}
+
+impl Iterator for Composite {
+    type Item = u64;
+    fn next(&mut self) -> Option<Self::Item> {
+        while self.curr == *self.primes.peek().unwrap() {
+            self.curr += 1;
+            self.primes.next();
+        }
+        let n = self.curr;
+        self.curr += 1;
+        Some(n)
+    }
+}
+
+pub fn composites() -> Composite {
+    Composite{curr: 2, primes: primes().peekable()}
 }
 
 pub trait Sum<T> {
