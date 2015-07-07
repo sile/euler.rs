@@ -5,23 +5,7 @@
 //!
 use std::collections::HashSet;
 use std::cmp;
-
-struct Pentagonal {
-    curr: u64
-}
-
-impl Iterator for Pentagonal {
-    type Item = u64;
-    fn next(&mut self) -> Option<Self::Item> {
-        let n = self.curr;
-        self.curr += 1;
-        Some(n * (3 * n - 1) / 2)
-    }
-}
-
-fn pentagonal_numbers(start: u64) -> Pentagonal {
-    Pentagonal{curr: start}
-}
+use utils;
 
 pub fn solve() -> u64 {
     let mut min = u64::max_value();
@@ -29,22 +13,22 @@ pub fn solve() -> u64 {
     let mut pentagonals = HashSet::new();
     let mut start = 1;
 
-    for x in pentagonal_numbers(2) {
+    for x in utils::pentagonal_numbers(2) {
         if x - last >= min {
             break
         }
-        for y in pentagonal_numbers(pentagonals.len() as u64 + 1).take_while(|&y| y <= x + last ) {
+        for y in utils::pentagonal_numbers(pentagonals.len() as u64 + 1).take_while(|&y| y <= x + last ) {
             pentagonals.insert(y);
         }
 
         min = cmp::min(
             min,
-            pentagonal_numbers(start)
+            utils::pentagonal_numbers(start)
                 .take_while(|&y| y < x )
                 .filter(|&y| pentagonals.contains(&(x-y)) && pentagonals.contains(&(x+y)) )
                 .map(|y| x - y )
                 .last().unwrap_or(u64::max_value()));
-        start += pentagonal_numbers(start).take_while(|&y| x - y >= min).count() as u64;
+        start += utils::pentagonal_numbers(start).take_while(|&y| x - y >= min).count() as u64;
         last = x;
     }
     min

@@ -172,3 +172,52 @@ pub fn nth_permutation(v: &[u8], mut nth: usize) -> Option<Vec<u8>> {
 pub fn digits_to_int(v: &[u8]) -> usize {
     v.iter().fold(0, |a,&b| a * 10 + b as usize)
 }
+
+pub struct Triangle {
+    curr: u64,
+}
+
+impl Iterator for Triangle {
+    type Item = u64;
+    fn next(&mut self) -> Option<u64> {
+        let n = self.curr;
+        self.curr += 1;
+        Some(n * (n+1) / 2)
+    }
+}
+
+pub fn triangle_numbers(start: u64) -> Triangle{ Triangle{curr: start} }
+
+pub struct Pentagonal {
+    curr: u64
+}
+
+impl Iterator for Pentagonal {
+    type Item = u64;
+    fn next(&mut self) -> Option<Self::Item> {
+        let n = self.curr;
+        self.curr += 1;
+        Some(n * (3 * n - 1) / 2)
+    }
+}
+
+pub fn pentagonal_numbers(start: u64) -> Pentagonal {
+    Pentagonal{curr: start}
+}
+
+pub struct Hexagonal {
+    curr: u64
+}
+
+impl Iterator for Hexagonal {
+    type Item = u64;
+    fn next(&mut self) -> Option<Self::Item> {
+        let n = self.curr;
+        self.curr += 1;
+        Some(n * (2 * n - 1))
+    }
+}
+
+pub fn hexagonal_numbers(start: u64) -> Hexagonal {
+    Hexagonal{curr: start}
+}
