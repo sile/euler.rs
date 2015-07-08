@@ -7,7 +7,7 @@ use utils::{self,Product};
 
 struct IrrationalDecimalFraction {
     next: usize,
-    curr: Vec<usize>,
+    curr: Vec<u8>,
 }
 
 impl Iterator for IrrationalDecimalFraction {
@@ -18,7 +18,7 @@ impl Iterator for IrrationalDecimalFraction {
             self.next += 1;
         }
         let d = self.curr.pop().unwrap();
-        Some(d)
+        Some(d as usize)
     }
 }
 

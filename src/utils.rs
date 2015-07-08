@@ -153,10 +153,10 @@ pub fn digits<T: FromPrimitive+Div<Output=T>+Zero+Eq+Clone>(mut n: T) -> usize {
     d
 }
 
-pub fn int_to_digits(mut n: usize) -> Vec<usize> {
+pub fn int_to_digits(mut n: usize) -> Vec<u8> {
     let mut v = Vec::new();
     while n > 0 {
-        v.push(n % 10);
+        v.push((n % 10) as u8);
         n /= 10;
     }
     v
