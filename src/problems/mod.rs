@@ -49,3 +49,4 @@ pub mod problem048;
 pub mod problem049;
 pub mod problem050;
 pub mod problem051;
+pub mod problem052;
