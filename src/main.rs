@@ -63,6 +63,7 @@ fn main() {
             50  => println!("[{}] answer: {}", n, problem050::solve()),
             51  => println!("[{}] answer: {}", n, problem051::solve()),
             52  => println!("[{}] answer: {}", n, problem052::solve()),
+            53  => println!("[{}] answer: {}", n, problem053::solve()),
             _   => println!("{} is an unsolved problem", n),
         }
     }
