@@ -1,7 +1,7 @@
 //! [56] Powerful digit sum
 //! -----------------------
 //!
-//! https://projecteuler.net/problem=55
+//! https://projecteuler.net/problem=56
 //!
 extern crate num;
 use self::num::FromPrimitive;
