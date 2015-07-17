@@ -57,3 +57,4 @@ pub mod problem056;
 pub mod problem057;
 pub mod problem058;
 pub mod problem059;
+pub mod problem060;
