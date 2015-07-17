@@ -174,6 +174,19 @@ pub fn load_names(filename: &str) -> Vec<String> {
     names
 }
 
+pub fn load_bytes(filename: &str) -> Vec<u8> {
+    let mut bytes = Vec::new();
+    let mut f = File::open(Path::new(filename)).unwrap();
+    let mut s = String::new();
+
+    f.read_to_string(&mut s).unwrap();
+    for token in s.split(',') {
+        let n = u8::from_str_radix(token.trim_right_matches('\n'), 10).unwrap();
+        bytes.push(n);
+    }
+    bytes
+}
+
 pub fn nth_permutation(v: &[u8], mut nth: usize) -> Option<Vec<u8>> {
     let mut r = Vec::new();
     for i in 0..v.len() {
