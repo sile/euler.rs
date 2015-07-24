@@ -1,8 +1,7 @@
 //! [64] Odd period square roots
 //! ----------------------------
 //!
-// extern crate num;
-// use self::num::integer;
+use std::collections::HashMap;
 
 #[derive(Debug)]
 struct SquareRootFraction {
@@ -14,13 +13,13 @@ struct SquareRootFraction {
 }
 
 impl Iterator for SquareRootFraction {
-    type Item = usize;
+    type Item = (usize, usize, usize);
     fn next(&mut self) -> Option<Self::Item> {
         if self.n == self.fs * self.fs {
             return None
         }
 
-        let curr = self.a;
+        let curr = (self.a, self.num, self.denom);
         // num / (sqrt(n) - denom)
         // = (sqrt(n) + denom) / X
         // ----
@@ -56,10 +55,20 @@ fn square_root_fractions(n: usize) -> SquareRootFraction {
 }
 
 pub fn solve() -> usize {
-    for i in 2..10001 {
-        println!("[{}] {:?}", i, square_root_fractions(i).take(10).collect::<Vec<_>>());
-    }
-    10
+    (2..10001)
+        .map(|i| {
+            let mut map = HashMap::new();
+            let period = (0..).zip(square_root_fractions(i)).filter_map(|(j, t)| {
+                if let Some(start) = map.get(&t) {
+                    return Some(j - start)
+                }
+                map.insert(t, j);
+                None
+            }).nth(0).unwrap_or(0);
+            period
+        })
+        .filter(|&p| p % 2 == 1 )
+        .count()
 }
 
 fn floor_square(n: usize) -> usize {
