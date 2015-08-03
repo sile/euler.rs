@@ -58,6 +58,56 @@ pub fn primes() -> Prime {
     Prime{curr: 2, sieve: HashMap::new()}
 }
 
+pub struct RelativelyPrime {
+    n: u64,
+    curr: u64,
+    sieve: HashMap<u64, u64>, // composite_number => base_composite_number
+}
+
+impl RelativelyPrime {
+    pub fn is_prime(&mut self, n: u64) -> bool {
+        if n == 1 {
+            return true
+        }
+        match self.sieve.remove(&n) {
+            Some(base_composite) => { // composite number
+                self.mark_composite(n/base_composite + 1,base_composite);
+                false
+            },
+            None => {
+                if self.n % n == 0 {
+                    // composite number
+                    self.mark_composite(2, n);
+                    false
+                } else {
+                    // prime number
+                    true
+                }
+            },
+        }
+    }
+    fn mark_composite(&mut self, times: u64, base: u64) {
+        (times..).find(|i| !self.sieve.contains_key(&(i*base)) ).and_then(|i| self.sieve.insert(i*base, base) );
+    }
+}
+
+impl Iterator for RelativelyPrime {
+    type Item = u64;
+    fn next(&mut self) -> Option<u64> {
+        match (self.curr..self.n).find(|n| self.is_prime(*n) ) {
+            None        => None,
+            Some(prime) => {
+                self.curr = prime + 1;
+                Some(prime)
+            },
+        }
+    }
+}
+
+pub fn relatively_primes(n: u64) -> RelativelyPrime {
+    RelativelyPrime{n: n, curr: 1, sieve: HashMap::new()}
+}
+
 pub struct Composite {
     curr:   u64,
     primes: Peekable<Prime>,
