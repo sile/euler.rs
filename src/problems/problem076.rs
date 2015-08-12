@@ -5,7 +5,6 @@ pub fn solve() -> usize {
     let max = 100;
     let mut ways_table: Vec<Vec<_>> = Vec::with_capacity(max+1);
     for n in 0..max+1 {
-        println!("{}", n);
         let mut ways = vec![0; n+1];
         for lft in 1..n/2+1 {
             let rgt = n - lft;
