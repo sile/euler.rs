@@ -10,8 +10,7 @@
 //!
 //! Find the sum of the digits in the number 100!
 //! ```
-extern crate num;
-use self::num::bigint::BigUint;
+use num::bigint::BigUint;
 use utils::{self,Sum};
 
 pub fn solve() -> u32 {

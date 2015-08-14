@@ -3,10 +3,8 @@
 //!
 //! https://projecteuler.net/problem=46
 //!
-extern crate num;
-
 use utils;
-use self::num::integer::Integer;
+use num::integer::Integer;
 
 pub fn solve() -> u64 {
     utils::composites()

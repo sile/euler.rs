@@ -3,11 +3,10 @@
 //!
 //! https://projecteuler.net/problem=29
 //!
-extern crate num;
-
 use std::collections::HashSet;
-use self::num::bigint::BigUint;
-use self::num::FromPrimitive;
+use num;
+use num::bigint::BigUint;
+use num::FromPrimitive;
 
 pub fn solve() -> usize {
     let n = 100;

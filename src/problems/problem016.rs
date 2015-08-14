@@ -7,9 +7,9 @@
 //!
 //! What is the sum of the digits of the number 2^1000?
 //! ```
-extern crate num;
-use self::num::bigint::BigUint;
-use self::num::FromPrimitive;
+use num;
+use num::bigint::BigUint;
+use num::FromPrimitive;
 use utils::Sum;
 
 pub fn solve() -> u32 {

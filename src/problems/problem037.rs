@@ -3,8 +3,7 @@
 //!
 //! https://projecteuler.net/problem=37
 //!
-extern crate num;
-
+use num;
 use utils::{self,Sum};
 use std::collections::HashSet;
 

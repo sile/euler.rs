@@ -1,10 +1,8 @@
 //! [69] Totient maximum
 //! ---------------------
 //!
-extern crate num;
-
 use utils;
-use self::num::rational::Ratio;
+use num::rational::Ratio;
 
 const LIMIT: usize = 1_000_001;
 

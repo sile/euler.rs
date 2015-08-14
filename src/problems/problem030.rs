@@ -3,7 +3,7 @@
 //!
 //! https://projecteuler.net/problem=30
 //!
-extern crate num;
+use num;
 use utils::Sum;
 
 const POWERS: usize = 5;

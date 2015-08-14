@@ -3,9 +3,9 @@
 //!
 //! https://projecteuler.net/problem=56
 //!
-extern crate num;
-use self::num::FromPrimitive;
-use self::num::bigint::BigUint;
+use num;
+use num::FromPrimitive;
+use num::bigint::BigUint;
 use utils::Sum;
 
 pub fn solve() -> usize {

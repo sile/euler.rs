@@ -3,8 +3,7 @@
 //!
 //! https://projecteuler.net/problem=35
 //!
-extern crate num;
-
+use num;
 use utils;
 use std::collections::HashSet;
 use std::iter::FromIterator;

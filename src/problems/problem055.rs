@@ -3,9 +3,9 @@
 //!
 //! https://projecteuler.net/problem=55
 //!
-extern crate num;
-use self::num::FromPrimitive;
-use self::num::bigint::BigUint;
+use num;
+use num::FromPrimitive;
+use num::bigint::BigUint;
 
 pub fn solve() -> usize {
     (1..10_000).filter(|&n| is_lychrel_number(n) ).count()

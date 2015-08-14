@@ -3,8 +3,7 @@
 //!
 //! https://projecteuler.net/problem=38
 //!
-extern crate num;
-
+use num;
 use utils;
 
 pub fn solve() -> u64 {

@@ -1,10 +1,9 @@
 //! [63] Powerful digit counts
 //! --------------------------
 //!
-extern crate num;
-
-use self::num::bigint::BigUint;
-use self::num::FromPrimitive;
+use num;
+use num::bigint::BigUint;
+use num::FromPrimitive;
 use utils::Sum;
 
 pub fn solve() -> usize {

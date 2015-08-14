@@ -1,10 +1,8 @@
 //! [73] Counting fractions in a range
 //! ----------------------------------
 //!
-extern crate num;
-
-use self::num::integer;
-use self::num::rational::Ratio;
+use num::integer;
+use num::rational::Ratio;
 
 pub fn solve() -> usize {
     let limit = 12_001;

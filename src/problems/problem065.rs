@@ -1,10 +1,9 @@
 //! [65] Convergents of e
 //! ---------------------
 //!
-extern crate num;
-use self::num::rational::Ratio;
-use self::num::bigint::BigUint;
-use self::num::{One,FromPrimitive};
+use num::rational::Ratio;
+use num::bigint::BigUint;
+use num::{One,FromPrimitive};
 use utils::Sum;
 
 pub fn solve() -> usize {

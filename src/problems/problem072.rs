@@ -2,10 +2,8 @@
 //! -----------------------
 //!
 //! see also: problem070.rs
-extern crate num;
-
 use utils::{self,Sum};
-use self::num::rational::Ratio;
+use num::rational::Ratio;
 
 const LIMIT: usize = 1_000_001;
 

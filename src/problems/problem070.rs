@@ -1,10 +1,8 @@
 //! [70] Totient permutation
 //! ------------------------
 //!
-extern crate num;
-
 use utils;
-use self::num::rational::Ratio;
+use num::rational::Ratio;
 
 const LIMIT: usize = 10_000_000;
 

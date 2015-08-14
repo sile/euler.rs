@@ -1,10 +1,8 @@
 //! [71] Ordered fractions
 //! ----------------------
 //!
-extern crate num;
-
-use self::num::integer;
-use self::num::rational::Ratio;
+use num::integer;
+use num::rational::Ratio;
 
 pub fn solve() -> usize {
     let limit = 1_000_001;

@@ -3,11 +3,9 @@
 //!
 //! https://projecteuler.net/problem=57
 //!
-extern crate num;
-
 use std::ops::Add;
-use self::num::bigint::BigUint;
-use self::num::FromPrimitive;
+use num::bigint::BigUint;
+use num::FromPrimitive;
 
 struct Convergent {
     num: BigUint,

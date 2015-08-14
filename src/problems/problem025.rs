@@ -26,11 +26,9 @@
 //!
 //! What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
 //! ```
-extern crate num;
-
 use utils;
-use self::num::bigint::BigUint;
-use self::num::One;
+use num::bigint::BigUint;
+use num::One;
 
 pub fn solve() -> usize {
     let border = n_digits(1000);

@@ -1,8 +1,7 @@
 //! [60] Prime pair sets
 //! --------------------
 //!
-extern crate num;
-
+use num;
 use utils::{self,Prime};
 use std::collections::HashSet;
 

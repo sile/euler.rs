@@ -3,9 +3,7 @@
 //!
 //! https://projecteuler.net/problem=33
 //!
-extern crate num;
-
-use self::num::rational::Ratio;
+use num::rational::Ratio;
 
 pub fn solve() -> usize {
     let mut r = Ratio::from_integer(1);

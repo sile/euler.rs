@@ -3,8 +3,7 @@
 //!
 //! https://projecteuler.net/problem=51
 //!
-extern crate num;
-
+use num;
 use utils::{self,Prime};
 use std::collections::HashSet;
 

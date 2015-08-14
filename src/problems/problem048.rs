@@ -3,11 +3,10 @@
 //!
 //! https://projecteuler.net/problem=48
 //!
-extern crate num;
-
 use utils::Sum;
-use self::num::bigint::BigUint;
-use self::num::FromPrimitive;
+use num;
+use num::bigint::BigUint;
+use num::FromPrimitive;
 
 pub fn solve() -> BigUint {
     let n = (1..1001).map(|n| num::pow(BigUint::from_usize(n).unwrap(), n) ).summation();

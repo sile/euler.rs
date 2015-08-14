@@ -2,11 +2,10 @@
 //! -------------------------
 //!
 //! see also: https://en.wikipedia.org/wiki/Pell%27s_equation
-extern crate num;
-
-use self::num::rational::Ratio;
-use self::num::bigint::BigUint;
-use self::num::{Zero,One,FromPrimitive};
+use num;
+use num::rational::Ratio;
+use num::bigint::BigUint;
+use num::{Zero,One,FromPrimitive};
 
 // see also: problem064.rs
 #[derive(Debug)]
