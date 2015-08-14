@@ -1,3 +1,5 @@
+extern crate num;
+
 use std::env;
 
 pub mod utils;
@@ -88,6 +90,7 @@ fn main() {
             75  => println!("[{}] answer: {}", n, problem075::solve()),
             76  => println!("[{}] answer: {}", n, problem076::solve()),
             77  => println!("[{}] answer: {}", n, problem077::solve()),
+            78  => println!("[{}] answer: {}", n, problem078::solve()),
             _   => println!("{} is an unsolved problem", n),
         }
     }

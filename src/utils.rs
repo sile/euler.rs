@@ -1,12 +1,10 @@
-extern crate num;
-
 use std::path::Path;
 use std::fs::File;
 use std::io::Read;
 use std::ops::{Add,Mul,Div};
 use std::collections::HashMap;
 use std::iter::Peekable;
-use self::num::{One,Zero,FromPrimitive};
+use num::{self,One,Zero,FromPrimitive};
 
 pub struct Fibonacci<T> {
     curr: T,
