@@ -235,6 +235,22 @@ pub fn load_bytes(filename: &str) -> Vec<u8> {
     bytes
 }
 
+pub fn load_matrix(filename: &str, rows: usize, cols: usize) -> Vec<Vec<usize>> {
+    let mut matrix = Vec::new();
+    let mut f = File::open(Path::new(filename)).unwrap();
+    let mut s = String::new();
+
+    f.read_to_string(&mut s).unwrap();
+    for row in s.split('\n') {
+        if row.len() == 0 { continue }
+        let cells: Vec<_> = row.split(',').map(|cell| usize::from_str_radix(cell, 10).unwrap() ).collect();
+        assert_eq!(cols, cells.len());
+        matrix.push(cells);
+    }
+    assert_eq!(rows, matrix.len());
+    matrix
+}
+
 pub fn nth_permutation(v: &[u8], mut nth: usize) -> Option<Vec<u8>> {
     let mut r = Vec::new();
     for i in 0..v.len() {
