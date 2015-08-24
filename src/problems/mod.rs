@@ -80,3 +80,4 @@ pub mod problem079;
 pub mod problem080;
 pub mod problem081;
 pub mod problem082;
+pub mod problem083;
