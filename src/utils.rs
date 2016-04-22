@@ -1,17 +1,17 @@
 use std::path::Path;
 use std::fs::File;
 use std::io::Read;
-use std::ops::{Add,Mul,Div};
+use std::ops::{Add, Mul, Div};
 use std::collections::HashMap;
 use std::iter::Peekable;
-use num::{self,One,Zero,FromPrimitive};
+use num::{self, One, Zero, FromPrimitive};
 
 pub struct Fibonacci<T> {
     curr: T,
     next: T,
 }
 
-impl<T: Add<Output=T>+One+Clone> Iterator for Fibonacci<T> {
+impl<T: Add<Output = T> + One + Clone> Iterator for Fibonacci<T> {
     type Item = T;
 
     fn next(&mut self) -> Option<T> {
@@ -23,7 +23,10 @@ impl<T: Add<Output=T>+One+Clone> Iterator for Fibonacci<T> {
 }
 
 pub fn fibonacci<T: One>() -> Fibonacci<T> {
-    Fibonacci {curr: num::one(), next: num::one()}
+    Fibonacci {
+        curr: num::one(),
+        next: num::one(),
+    }
 }
 
 pub struct Prime {
@@ -34,26 +37,37 @@ pub struct Prime {
 impl Prime {
     pub fn is_prime(&mut self, n: u64) -> bool {
         match self.sieve.remove(&n) {
-            None        => {self.mark_composite(2, n);               true},  // prime number
-            Some(prime) => {self.mark_composite(n/prime + 1, prime); false}, // composite number
+            None => {
+                self.mark_composite(2, n);
+                true
+            }  // prime number
+            Some(prime) => {
+                self.mark_composite(n / prime + 1, prime);
+                false
+            } // composite number
         }
     }
     fn mark_composite(&mut self, times: u64, prime: u64) {
-        (times..).find(|i| !self.sieve.contains_key(&(i*prime)) ).and_then(|i| self.sieve.insert(i*prime, prime) );
+        (times..)
+            .find(|i| !self.sieve.contains_key(&(i * prime)))
+            .and_then(|i| self.sieve.insert(i * prime, prime));
     }
 }
 
 impl Iterator for Prime {
     type Item = u64;
     fn next(&mut self) -> Option<u64> {
-        let prime = (self.curr..).find(|n| self.is_prime(*n) ).unwrap();
+        let prime = (self.curr..).find(|n| self.is_prime(*n)).unwrap();
         self.curr = prime + 1;
         Some(prime)
     }
 }
 
 pub fn primes() -> Prime {
-    Prime{curr: 2, sieve: HashMap::new()}
+    Prime {
+        curr: 2,
+        sieve: HashMap::new(),
+    }
 }
 
 pub struct RelativelyPrime {
@@ -65,13 +79,14 @@ pub struct RelativelyPrime {
 impl RelativelyPrime {
     pub fn is_prime(&mut self, n: u64) -> bool {
         if n == 1 {
-            return true
+            return true;
         }
         match self.sieve.remove(&n) {
-            Some(base_composite) => { // composite number
-                self.mark_composite(n/base_composite + 1,base_composite);
+            Some(base_composite) => {
+                // composite number
+                self.mark_composite(n / base_composite + 1, base_composite);
                 false
-            },
+            }
             None => {
                 if self.n % n == 0 {
                     // composite number
@@ -81,33 +96,39 @@ impl RelativelyPrime {
                     // prime number
                     true
                 }
-            },
+            }
         }
     }
     fn mark_composite(&mut self, times: u64, base: u64) {
-        (times..).find(|i| !self.sieve.contains_key(&(i*base)) ).and_then(|i| self.sieve.insert(i*base, base) );
+        (times..)
+            .find(|i| !self.sieve.contains_key(&(i * base)))
+            .and_then(|i| self.sieve.insert(i * base, base));
     }
 }
 
 impl Iterator for RelativelyPrime {
     type Item = u64;
     fn next(&mut self) -> Option<u64> {
-        match (self.curr..self.n).find(|n| self.is_prime(*n) ) {
-            None        => None,
+        match (self.curr..self.n).find(|n| self.is_prime(*n)) {
+            None => None,
             Some(prime) => {
                 self.curr = prime + 1;
                 Some(prime)
-            },
+            }
         }
     }
 }
 
 pub fn relatively_primes(n: u64) -> RelativelyPrime {
-    RelativelyPrime{n: n, curr: 1, sieve: HashMap::new()}
+    RelativelyPrime {
+        n: n,
+        curr: 1,
+        sieve: HashMap::new(),
+    }
 }
 
 pub struct Composite {
-    curr:   u64,
+    curr: u64,
     primes: Peekable<Prime>,
 }
 
@@ -125,16 +146,22 @@ impl Iterator for Composite {
 }
 
 pub fn composites() -> Composite {
-    Composite{curr: 2, primes: primes().peekable()}
+    Composite {
+        curr: 2,
+        primes: primes().peekable(),
+    }
 }
 
 pub trait Sum<T> {
     fn summation(self) -> T;
 }
 
-impl<T,O> Sum<O> for T where T: Iterator<Item=O>, O: Add + Zero {
+impl<T, O> Sum<O> for T
+    where T: Iterator<Item = O>,
+          O: Add + Zero
+{
     fn summation(self) -> O {
-        self.fold(num::zero(), |a,b| a+b)
+        self.fold(num::zero(), |a, b| a + b)
     }
 }
 
@@ -142,9 +169,12 @@ pub trait Product<T> {
     fn prod(self) -> T;
 }
 
-impl<T,O> Product<O> for T where T: Iterator<Item=O>, O: Mul + One {
+impl<T, O> Product<O> for T
+    where T: Iterator<Item = O>,
+          O: Mul + One
+{
     fn prod(self) -> O {
-        self.fold(num::one(), |a,b| a*b)
+        self.fold(num::one(), |a, b| a * b)
     }
 }
 
@@ -178,20 +208,24 @@ impl Iterator for Divisor {
 }
 
 pub fn divisors(dividend: usize) -> Divisor {
-    Divisor{dividend: dividend, curr: 2, buff: Some(1)}
+    Divisor {
+        dividend: dividend,
+        curr: 2,
+        buff: Some(1),
+    }
 }
 
-pub fn factorial<T: One+Add<Output=T>+Mul+Clone>(i: usize) -> T {
+pub fn factorial<T: One + Add<Output = T> + Mul + Clone>(i: usize) -> T {
     let mut n: T = num::one();
     let mut c: T = num::one();
-    for _ in (0..i) {
+    for _ in 0..i {
         n = n * c.clone();
         c = c + num::one();
     }
     n
 }
 
-pub fn digits<T: FromPrimitive+Div<Output=T>+Zero+Eq+Clone>(mut n: T) -> usize {
+pub fn digits<T: FromPrimitive + Div<Output = T> + Zero + Eq + Clone>(mut n: T) -> usize {
     let mut d = 0;
     let ten = T::from_u8(10).unwrap();
     while n != num::zero() {
@@ -242,8 +276,12 @@ pub fn load_matrix(filename: &str, rows: usize, cols: usize) -> Vec<Vec<usize>> 
 
     f.read_to_string(&mut s).unwrap();
     for row in s.split('\n') {
-        if row.len() == 0 { continue }
-        let cells: Vec<_> = row.split(',').map(|cell| usize::from_str_radix(cell, 10).unwrap() ).collect();
+        if row.len() == 0 {
+            continue;
+        }
+        let cells: Vec<_> = row.split(',')
+                               .map(|cell| usize::from_str_radix(cell, 10).unwrap())
+                               .collect();
         assert_eq!(cols, cells.len());
         matrix.push(cells);
     }
@@ -266,11 +304,15 @@ pub fn nth_permutation(v: &[u8], mut nth: usize) -> Option<Vec<u8>> {
             nth -= f;
         }
     }
-    if v.len() == r.len() { Some(r) } else { None }
+    if v.len() == r.len() {
+        Some(r)
+    } else {
+        None
+    }
 }
 
 pub fn digits_to_int(v: &[u8]) -> usize {
-    v.iter().fold(0, |a,&b| a * 10 + b as usize)
+    v.iter().fold(0, |a, &b| a * 10 + b as usize)
 }
 
 pub struct Triangle {
@@ -282,14 +324,16 @@ impl Iterator for Triangle {
     fn next(&mut self) -> Option<u64> {
         let n = self.curr;
         self.curr += 1;
-        Some(n * (n+1) / 2)
+        Some(n * (n + 1) / 2)
     }
 }
 
-pub fn triangle_numbers(start: u64) -> Triangle{ Triangle{curr: start} }
+pub fn triangle_numbers(start: u64) -> Triangle {
+    Triangle { curr: start }
+}
 
 pub struct Pentagonal {
-    curr: u64
+    curr: u64,
 }
 
 impl Iterator for Pentagonal {
@@ -302,11 +346,11 @@ impl Iterator for Pentagonal {
 }
 
 pub fn pentagonal_numbers(start: u64) -> Pentagonal {
-    Pentagonal{curr: start}
+    Pentagonal { curr: start }
 }
 
 pub struct Hexagonal {
-    curr: u64
+    curr: u64,
 }
 
 impl Iterator for Hexagonal {
@@ -319,5 +363,5 @@ impl Iterator for Hexagonal {
 }
 
 pub fn hexagonal_numbers(start: u64) -> Hexagonal {
-    Hexagonal{curr: start}
+    Hexagonal { curr: start }
 }
