@@ -6,7 +6,7 @@
 pub fn solve() -> usize {
     let mut count = 0;
     for n in 1..101 {
-        for r in 1..n+1 {
+        for r in 1..n + 1 {
             if is_combinatric_greater_than(n, r, 1_000_000) {
                 count += 1;
             }
@@ -16,8 +16,8 @@ pub fn solve() -> usize {
 }
 
 fn is_combinatric_greater_than(n: usize, r: usize, border: usize) -> bool {
-    let mut nums = r+1..n+1;
-    let mut denoms = 1..(n-r)+1;
+    let mut nums = r + 1..n + 1;
+    let mut denoms = 1..(n - r) + 1;
     let mut tmp = 1.0 as f64;
 
     loop {

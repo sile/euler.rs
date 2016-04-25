@@ -15,8 +15,12 @@ pub fn solve() -> usize {
     for i in 0..triangle.len() {
         let mut parent_l = 0;
         let mut parent_r = 0;
-        if col > 0   { parent_l = table[i - row - 1]; }
-        if col < row { parent_r = table[i - row];     }
+        if col > 0 {
+            parent_l = table[i - row - 1];
+        }
+        if col < row {
+            parent_r = table[i - row];
+        }
 
         table[i] = triangle[i] + cmp::max(parent_l, parent_r);
 
@@ -38,8 +42,10 @@ fn load_triangle() -> Vec<usize> {
 
     f.read_to_string(&mut s).unwrap();
     for line in s.split('\n') {
-        if line.len() == 0 { continue }
-        for n in line.split(' ').map(|n| usize::from_str_radix(n, 10).unwrap() ) {
+        if line.len() == 0 {
+            continue;
+        }
+        for n in line.split(' ').map(|n| usize::from_str_radix(n, 10).unwrap()) {
             nums.push(n);
         }
     }

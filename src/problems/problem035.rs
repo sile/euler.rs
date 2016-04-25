@@ -10,13 +10,15 @@ use std::iter::FromIterator;
 
 pub fn solve() -> usize {
     let primes = HashSet::from_iter(utils::primes().take_while(|&n| n < 1_000_000));
-    primes.iter().filter(|&&n| is_circular_prime(n, &primes) ).count()
+    primes.iter().filter(|&&n| is_circular_prime(n, &primes)).count()
 }
 
 fn is_circular_prime(mut n: u64, primes: &HashSet<u64>) -> bool {
     let c = digit_count(n);
     for _ in 0..c {
-        if !primes.contains(&n) { return false }
+        if !primes.contains(&n) {
+            return false;
+        }
         let (div, rem) = num::integer::div_rem(n, 10);
         n = rem * num::pow(10, c - 1) + div;
     }

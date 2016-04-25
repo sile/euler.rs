@@ -25,19 +25,26 @@ impl Iterator for Fraction {
 }
 
 fn fractions(denom: usize) -> Fraction {
-    Fraction{num: 1, denom: denom}
+    Fraction {
+        num: 1,
+        denom: denom,
+    }
 }
 
 pub fn solve() -> usize {
-    (2..1000).map(|n| (recurring_cycle_len(n), n) ).max().unwrap().1
+    (2..1000).map(|n| (recurring_cycle_len(n), n)).max().unwrap().1
 }
 
 fn recurring_cycle_len(n: usize) -> usize {
     let mut map = HashMap::new();
-    (1..).zip(fractions(n)).map(|(i, dividend_quotient)| {
-        match map.insert(dividend_quotient, i) {
-            None    => 0,
-            Some(j) => i - j,
-        }
-    }).find(|&x| x != 0 ).unwrap_or(0)
+    (1..)
+        .zip(fractions(n))
+        .map(|(i, dividend_quotient)| {
+            match map.insert(dividend_quotient, i) {
+                None => 0,
+                Some(j) => i - j,
+            }
+        })
+        .find(|&x| x != 0)
+        .unwrap_or(0)
 }

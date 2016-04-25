@@ -8,11 +8,11 @@ use num::FromPrimitive;
 use num::bigint::BigUint;
 
 pub fn solve() -> usize {
-    (1..10_000).filter(|&n| is_lychrel_number(n) ).count()
+    (1..10_000).filter(|&n| is_lychrel_number(n)).count()
 }
 
 fn is_lychrel_number(n: u64) -> bool {
-     let mut n = BigUint::from_u64(n).unwrap();
+    let mut n = BigUint::from_u64(n).unwrap();
     n = n.clone() + reverse(n);
     for _ in 0..49 {
         let r = reverse(n.clone());

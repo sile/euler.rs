@@ -1,8 +1,8 @@
 //! [80] Square root digital expansion
 //! ----------------------------------
 //!
-use num::{self,FromPrimitive};
-use num::rational::{Ratio,BigRational};
+use num::{self, FromPrimitive};
+use num::rational::{Ratio, BigRational};
 use num::bigint::BigInt;
 use utils::Sum;
 
@@ -18,12 +18,14 @@ impl Iterator for Sqrt {
         let denom = num::pow(BigInt::from_u64(10).unwrap(), self.i);
         let mut d = 0;
         for num in 1.. {
-            let tmp = num::pow(&self.cur + Ratio::new(BigInt::from_usize(num).unwrap(), denom.clone()), 2);
+            let tmp = num::pow(&self.cur +
+                               Ratio::new(BigInt::from_usize(num).unwrap(), denom.clone()),
+                               2);
             if self.n < tmp {
                 d = num - 1;
                 break;
             } else if self.n == tmp {
-                return None
+                return None;
             }
         }
         self.i += 1;
@@ -33,7 +35,7 @@ impl Iterator for Sqrt {
 }
 
 fn sqrt(n: usize) -> Sqrt {
-    Sqrt{
+    Sqrt {
         n: Ratio::from_integer(BigInt::from_usize(n).unwrap()),
         cur: Ratio::from_integer(num::zero()),
         i: 0,
@@ -42,10 +44,10 @@ fn sqrt(n: usize) -> Sqrt {
 
 pub fn solve() -> usize {
     (1..101)
-        .map(|n| (n, sqrt(n).take(100).collect::<Vec<_>>() ))
-        .filter(|x| x.1.len() == 100 )
-        .map(|x| (x.0, x.1.into_iter().summation()) )
-        .inspect(|x| println!("    {}: {}", x.0, x.1) )
-        .map(|x| x.1 )
+        .map(|n| (n, sqrt(n).take(100).collect::<Vec<_>>()))
+        .filter(|x| x.1.len() == 100)
+        .map(|x| (x.0, x.1.into_iter().summation()))
+        .inspect(|x| println!("    {}: {}", x.0, x.1))
+        .map(|x| x.1)
         .summation()
 }

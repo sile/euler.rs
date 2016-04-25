@@ -4,7 +4,7 @@
 use std::path::Path;
 use std::fs::File;
 use std::io::Read;
-use std::collections::{HashMap,HashSet};
+use std::collections::{HashMap, HashSet};
 use utils;
 
 pub fn solve() -> usize {
@@ -24,7 +24,7 @@ pub fn solve() -> usize {
         precedings.get_mut(&digits[1]).unwrap().insert(digits[2]);
     }
     while precedings.len() > 0 {
-        let head = *precedings.iter().find(|x| x.1.len() == 0 ).unwrap().0;
+        let head = *precedings.iter().find(|x| x.1.len() == 0).unwrap().0;
         precedings.remove(&head);
         for x in precedings.iter_mut() {
             x.1.remove(&head);
@@ -40,5 +40,5 @@ fn load(filename: &str) -> Vec<usize> {
     let mut s = String::new();
 
     f.read_to_string(&mut s).unwrap();
-   s .split("\n").filter(|x| x.len() > 0 ).map(|x| usize::from_str_radix(x, 10).unwrap() ).collect()
+    s.split("\n").filter(|x| x.len() > 0).map(|x| usize::from_str_radix(x, 10).unwrap()).collect()
 }

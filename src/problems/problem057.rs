@@ -27,11 +27,14 @@ impl Iterator for Convergent {
 }
 
 fn square_root_convergents() -> Convergent {
-    Convergent{num: BigUint::from_u8(1).unwrap(), denom: BigUint::from_u8(2).unwrap()}
+    Convergent {
+        num: BigUint::from_u8(1).unwrap(),
+        denom: BigUint::from_u8(2).unwrap(),
+    }
 }
 
 pub fn solve() -> usize {
-    square_root_convergents().take(1000).filter(|x| digits(&x.0) > digits(&x.1) ).count()
+    square_root_convergents().take(1000).filter(|x| digits(&x.0) > digits(&x.1)).count()
 }
 
 fn digits(n: &BigUint) -> usize {

@@ -12,10 +12,11 @@
 //! How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 //! ```
 pub fn solve() -> usize {
-    Date::new().skip_while(|d| d.to_tuple() < (1901, 1, 1))
-        .take_while(|d| d.to_tuple() <= (2000,12,31))
-        .filter(|d| d.weekday == 6 )
-        .filter(|d| d.day == 0 )
+    Date::new()
+        .skip_while(|d| d.to_tuple() < (1901, 1, 1))
+        .take_while(|d| d.to_tuple() <= (2000, 12, 31))
+        .filter(|d| d.weekday == 6)
+        .filter(|d| d.day == 0)
         .count()
 }
 
@@ -29,19 +30,19 @@ struct Date {
 
 impl Date {
     pub fn new() -> Date {
-        Date{
+        Date {
             year: 1900,
             month: 0,
             day: 0,
-            weekday: 0
+            weekday: 0,
         }
     }
     pub fn to_tuple(&self) -> (usize, usize, usize) {
-        (self.year, self.month+1, self.day+1)
+        (self.year, self.month + 1, self.day + 1)
     }
     pub fn increment_day(&mut self) {
         self.weekday = (self.weekday + 1) % 7;
-        self.day = (self.day  + 1) % self.month_days();
+        self.day = (self.day + 1) % self.month_days();
         if self.day == 0 {
             self.month = (self.month + 1) % 12;
             if self.month == 0 {
@@ -52,7 +53,13 @@ impl Date {
     fn month_days(&self) -> usize {
         match self.month {
             0 => 31,
-            1 => if self.is_leap_year() { 29 } else { 28 },
+            1 => {
+                if self.is_leap_year() {
+                    29
+                } else {
+                    28
+                }
+            }
             2 => 31,
             3 => 30,
             4 => 31,

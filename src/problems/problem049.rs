@@ -11,8 +11,12 @@ pub fn solve() -> u64 {
 
     for p in utils::primes() {
         let d = utils::digits(p);
-        if d < 4 { continue }
-        if d > 4 { break }
+        if d < 4 {
+            continue;
+        }
+        if d > 4 {
+            break;
+        }
 
         let least = least_permutation(p);
         if !primes.contains_key(&least) {
@@ -22,23 +26,23 @@ pub fn solve() -> u64 {
     }
 
     primes.values()
-        .filter(|ps| ps.len() >= 3 )
-        .flat_map(|ps| {
-            let mut v = Vec::new();
-            for i in 0..(ps.len()-2) {
-                for j in (i+1)..(ps.len()-1) {
-                    for k in (j+1)..ps.len() {
-                        v.push(vec![ps[i], ps[j], ps[k]]);
-                    }
-                }
-            }
-            v
-        })
-        .filter(|ps| ps[2]-ps[1] == ps[1]-ps[0] )
-        .filter(|ps| ps[0] != 1487 )
-        .map(|ps| ps[0] * 10000_0000 + ps[1] * 10000 + ps[2] )
-        .nth(0)
-        .unwrap()
+          .filter(|ps| ps.len() >= 3)
+          .flat_map(|ps| {
+              let mut v = Vec::new();
+              for i in 0..(ps.len() - 2) {
+                  for j in (i + 1)..(ps.len() - 1) {
+                      for k in (j + 1)..ps.len() {
+                          v.push(vec![ps[i], ps[j], ps[k]]);
+                      }
+                  }
+              }
+              v
+          })
+          .filter(|ps| ps[2] - ps[1] == ps[1] - ps[0])
+          .filter(|ps| ps[0] != 1487)
+          .map(|ps| ps[0] * 10000_0000 + ps[1] * 10000 + ps[2])
+          .nth(0)
+          .unwrap()
 }
 
 fn least_permutation(n: u64) -> u64 {

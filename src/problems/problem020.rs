@@ -11,9 +11,12 @@
 //! Find the sum of the digits in the number 100!
 //! ```
 use num::bigint::BigUint;
-use utils::{self,Sum};
+use utils::{self, Sum};
 
 pub fn solve() -> u32 {
     let num = 100;
-    format!("{}", utils::factorial::<BigUint>(num)).chars().map(|c| c.to_digit(10).unwrap() ).summation()
+    format!("{}", utils::factorial::<BigUint>(num))
+        .chars()
+        .map(|c| c.to_digit(10).unwrap())
+        .summation()
 }

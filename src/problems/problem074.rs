@@ -5,13 +5,15 @@ use utils::Sum;
 use std::collections::HashSet;
 
 struct Digit {
-    curr: usize
+    curr: usize,
 }
 
 impl Iterator for Digit {
     type Item = usize;
     fn next(&mut self) -> Option<Self::Item> {
-        if self.curr == 0 { return None }
+        if self.curr == 0 {
+            return None;
+        }
         let d = self.curr % 10;
         self.curr /= 10;
         Some(d)
@@ -19,20 +21,20 @@ impl Iterator for Digit {
 }
 
 fn digits(n: usize) -> Digit {
-    Digit{curr: n}
+    Digit { curr: n }
 }
 
 const TABLE: [usize; 10] = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880];
 
 fn factorial_sum(n: usize) -> usize {
-    digits(n).map(|d| TABLE[d] ).summation()
+    digits(n).map(|d| TABLE[d]).summation()
 }
 
 fn chain_count(mut n: usize) -> usize {
     let mut set = HashSet::new();
     loop {
         if set.contains(&n) {
-            break
+            break;
         }
         set.insert(n);
         n = factorial_sum(n);

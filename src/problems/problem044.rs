@@ -15,19 +15,22 @@ pub fn solve() -> u64 {
 
     for x in utils::pentagonal_numbers(2) {
         if x - last >= min {
-            break
+            break;
         }
-        for y in utils::pentagonal_numbers(pentagonals.len() as u64 + 1).take_while(|&y| y <= x + last ) {
+        for y in utils::pentagonal_numbers(pentagonals.len() as u64 + 1)
+                     .take_while(|&y| y <= x + last) {
             pentagonals.insert(y);
         }
 
-        min = cmp::min(
-            min,
-            utils::pentagonal_numbers(start)
-                .take_while(|&y| y < x )
-                .filter(|&y| pentagonals.contains(&(x-y)) && pentagonals.contains(&(x+y)) )
-                .map(|y| x - y )
-                .last().unwrap_or(u64::max_value()));
+        min = cmp::min(min,
+                       utils::pentagonal_numbers(start)
+                           .take_while(|&y| y < x)
+                           .filter(|&y| {
+                               pentagonals.contains(&(x - y)) && pentagonals.contains(&(x + y))
+                           })
+                           .map(|y| x - y)
+                           .last()
+                           .unwrap_or(u64::max_value()));
         start += utils::pentagonal_numbers(start).take_while(|&y| x - y >= min).count() as u64;
         last = x;
     }

@@ -13,14 +13,14 @@
 //!
 //! What is the total of all the name scores in the file?
 //! ```
-use utils::{self,Sum};
+use utils::{self, Sum};
 
 pub fn solve() -> usize {
     let mut names = utils::load_names("data/p022_names.txt");
-    names.sort_by(|a,b| a.cmp(b) );
-    names.iter().zip(1..).map(|(name,i)| score(i,name)).summation()
+    names.sort_by(|a, b| a.cmp(b));
+    names.iter().zip(1..).map(|(name, i)| score(i, name)).summation()
 }
 
 fn score(rank: usize, name: &str) -> usize {
-    name.bytes().map(|c| c as usize - 64 ).summation() * rank
+    name.bytes().map(|c| c as usize - 64).summation() * rank
 }

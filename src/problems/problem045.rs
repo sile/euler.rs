@@ -15,11 +15,13 @@ pub fn solve() -> u64 {
             let z = next_not_less_than(&mut hexagonal, x);
             (x, y, z)
         })
-        .filter(|&(x, y, z)| x == y && y == z )
-        .nth(2).unwrap().0
+        .filter(|&(x, y, z)| x == y && y == z)
+        .nth(2)
+        .unwrap()
+        .0
 }
 
-fn next_not_less_than<I: Iterator<Item=u64>>(itr: &mut Peekable<I>, n: u64) -> u64 {
+fn next_not_less_than<I: Iterator<Item = u64>>(itr: &mut Peekable<I>, n: u64) -> u64 {
     let mut r = 0;
     while let Some(&m) = itr.peek() {
         if m >= n {

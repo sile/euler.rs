@@ -10,16 +10,20 @@ pub fn solve() -> usize {
     let mut table = vec![Ratio::new(1,1); LIMIT];
     for p in utils::primes().map(|p| p as usize).take_while(|&p| p < LIMIT) {
         let r = Ratio::new(p, p - 1);
-        for i in (1..LIMIT/p+1).map(|i| i * p ) {
-            if i >= table.len() { continue }
+        for i in (1..LIMIT / p + 1).map(|i| i * p) {
+            if i >= table.len() {
+                continue;
+            }
             table[i] = table[i] * r.clone();
         }
     }
     table.into_iter()
-        .zip(0..)
-        .skip(2)
-        .filter(|&(r, n)| is_permutation(n, totient(n, &r)) )
-        .min().unwrap().1
+         .zip(0..)
+         .skip(2)
+         .filter(|&(r, n)| is_permutation(n, totient(n, &r)))
+         .min()
+         .unwrap()
+         .1
 }
 
 fn totient(n: usize, r: &Ratio<usize>) -> usize {
@@ -38,5 +42,5 @@ fn is_permutation(mut x: usize, mut y: usize) -> bool {
         count[y % 10] -= 1;
         y /= 10;
     }
-    count.into_iter().all(|&c| c == 0 )
+    count.into_iter().all(|&c| c == 0)
 }

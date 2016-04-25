@@ -13,7 +13,7 @@ use utils::Sum;
 
 pub fn solve() -> usize {
     let max = 1000;
-    (1..max+1).map(|n| word(n).chars().filter(|c| c.is_alphabetic() ).count() ).summation()
+    (1..max + 1).map(|n| word(n).chars().filter(|c| c.is_alphabetic()).count()).summation()
 }
 
 fn word(n: usize) -> String {
@@ -47,7 +47,7 @@ fn word(n: usize) -> String {
         80 => "eighty".to_string(),
         90 => "ninety".to_string(),
         1000 => "one thousand".to_string(),
-        _  => {
+        _ => {
             if n >= 100 {
                 let low = n % 100;
                 if low == 0 {
@@ -60,6 +60,6 @@ fn word(n: usize) -> String {
             } else {
                 unimplemented!()
             }
-        },
+        }
     }
 }

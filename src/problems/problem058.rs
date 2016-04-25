@@ -24,7 +24,11 @@ impl Iterator for Diagonal {
 }
 
 fn spiral_diagonals() -> Diagonal {
-    Diagonal{curr: 1, side: 1, rest_edges: 0}
+    Diagonal {
+        curr: 1,
+        side: 1,
+        rest_edges: 0,
+    }
 }
 
 pub fn solve() -> usize {

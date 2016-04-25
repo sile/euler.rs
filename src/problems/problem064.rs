@@ -16,7 +16,7 @@ impl Iterator for SquareRootFraction {
     type Item = (usize, usize, usize);
     fn next(&mut self) -> Option<Self::Item> {
         if self.n == self.fs * self.fs {
-            return None
+            return None;
         }
 
         let curr = (self.a, self.num, self.denom);
@@ -51,26 +51,36 @@ impl Iterator for SquareRootFraction {
 
 fn square_root_fractions(n: usize) -> SquareRootFraction {
     let fs = floor_square(n);
-    SquareRootFraction{n: n, fs: fs, a: fs, num: 1, denom: fs}
+    SquareRootFraction {
+        n: n,
+        fs: fs,
+        a: fs,
+        num: 1,
+        denom: fs,
+    }
 }
 
 pub fn solve() -> usize {
     (2..10001)
         .map(|i| {
             let mut map = HashMap::new();
-            let period = (0..).zip(square_root_fractions(i)).filter_map(|(j, t)| {
-                if let Some(start) = map.get(&t) {
-                    return Some(j - start)
-                }
-                map.insert(t, j);
-                None
-            }).nth(0).unwrap_or(0);
+            let period = (0..)
+                             .zip(square_root_fractions(i))
+                             .filter_map(|(j, t)| {
+                                 if let Some(start) = map.get(&t) {
+                                     return Some(j - start);
+                                 }
+                                 map.insert(t, j);
+                                 None
+                             })
+                             .nth(0)
+                             .unwrap_or(0);
             period
         })
-        .filter(|&p| p % 2 == 1 )
+        .filter(|&p| p % 2 == 1)
         .count()
 }
 
 fn floor_square(n: usize) -> usize {
-    (1..).take_while(|&i| i*i <= n ).last().unwrap()
+    (1..).take_while(|&i| i * i <= n).last().unwrap()
 }

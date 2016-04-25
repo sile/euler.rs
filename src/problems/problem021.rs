@@ -14,7 +14,7 @@ use utils::{self, Sum};
 
 pub fn solve() -> usize {
     let limit = 10_000;
-    (2..limit).filter(|&n| is_amicable(n) ).summation()
+    (2..limit).filter(|&n| is_amicable(n)).summation()
 }
 
 fn is_amicable(n: usize) -> bool {

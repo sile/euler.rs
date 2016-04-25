@@ -22,5 +22,5 @@ pub fn solve() -> usize {
 fn is_palindramic(n: usize) -> bool {
     let s = format!("{}", n);
     let s = s.as_bytes();
-    (0..(s.len() / 2)).all(|i| s[i] == s[s.len()-i-1] )
+    (0..(s.len() / 2)).all(|i| s[i] == s[s.len() - i - 1])
 }

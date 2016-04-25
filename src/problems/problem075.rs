@@ -15,14 +15,14 @@ impl Iterator for PrimitivePythagoreanTriple {
         let (a, b, c) = self.triple();
         if a + b + c <= self.limit {
             self.m += 2;
-            Some ((a, b, c))
+            Some((a, b, c))
         } else {
             self.n += 1;
             self.m = self.n + 1;
             let (a, b, c) = self.triple();
             if a + b + c <= self.limit {
                 self.m += 2;
-                Some ((a, b, c))
+                Some((a, b, c))
             } else {
                 None
             }
@@ -40,7 +40,11 @@ impl PrimitivePythagoreanTriple {
 }
 
 fn primitive_pythagorean_triples(limit: usize) -> PrimitivePythagoreanTriple {
-    PrimitivePythagoreanTriple{n: 1, m: 2, limit: limit}
+    PrimitivePythagoreanTriple {
+        n: 1,
+        m: 2,
+        limit: limit,
+    }
 }
 
 pub fn solve() -> usize {
@@ -49,8 +53,8 @@ pub fn solve() -> usize {
     for (a, b, c) in primitive_pythagorean_triples(limit) {
         let l = a + b + c;
         let mut n = 1;
-        while l * n  <= limit {
-            triangles.insert( (a*n, b*n, c*n) );
+        while l * n <= limit {
+            triangles.insert((a * n, b * n, c * n));
             n += 1;
         }
     }
@@ -59,5 +63,5 @@ pub fn solve() -> usize {
         let l = a + b + c;
         counts[l] += 1;
     }
-    counts.into_iter().filter(|&n| n == 1 ).count()
+    counts.into_iter().filter(|&n| n == 1).count()
 }

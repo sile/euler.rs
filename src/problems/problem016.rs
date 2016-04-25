@@ -14,5 +14,8 @@ use utils::Sum;
 
 pub fn solve() -> u32 {
     let power = 1000;
-    format!("{}", num::pow(BigUint::from_u8(2).unwrap(), power)).chars().map(|c| c.to_digit(10).unwrap() ).summation()
+    format!("{}", num::pow(BigUint::from_u8(2).unwrap(), power))
+        .chars()
+        .map(|c| c.to_digit(10).unwrap())
+        .summation()
 }

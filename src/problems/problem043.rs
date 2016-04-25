@@ -3,7 +3,7 @@
 //!
 //! https://projecteuler.net/problem=43
 //!
-use utils::{self,Sum};
+use utils::{self, Sum};
 
 struct Permutation {
     vec: Vec<u8>,
@@ -20,7 +20,7 @@ impl Iterator for Permutation {
 }
 
 fn permutation(vec: Vec<u8>) -> Permutation {
-    Permutation{vec: vec, nth: 0}
+    Permutation { vec: vec, nth: 0 }
 }
 
 pub fn solve() -> usize {
@@ -28,14 +28,13 @@ pub fn solve() -> usize {
     permutation(v.iter().map(|&n| n).collect())
         .filter(|ds| ds[0] != 0)
         .filter(|ds| {
-            (utils::digits_to_int(&ds[1..4]) % 2 == 0 &&
-             utils::digits_to_int(&ds[2..5]) % 3 == 0 &&
+            (utils::digits_to_int(&ds[1..4]) % 2 == 0 && utils::digits_to_int(&ds[2..5]) % 3 == 0 &&
              utils::digits_to_int(&ds[3..6]) % 5 == 0 &&
              utils::digits_to_int(&ds[4..7]) % 7 == 0 &&
              utils::digits_to_int(&ds[5..8]) % 11 == 0 &&
              utils::digits_to_int(&ds[6..9]) % 13 == 0 &&
              utils::digits_to_int(&ds[7..10]) % 17 == 0)
         })
-        .map(|ds| utils::digits_to_int(&ds) )
+        .map(|ds| utils::digits_to_int(&ds))
         .summation()
 }

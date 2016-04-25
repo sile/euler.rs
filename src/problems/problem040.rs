@@ -3,7 +3,7 @@
 //!
 //! https://projecteuler.net/problem=40
 //!
-use utils::{self,Product};
+use utils::{self, Product};
 
 struct IrrationalDecimalFraction {
     next: usize,
@@ -23,13 +23,22 @@ impl Iterator for IrrationalDecimalFraction {
 }
 
 fn irrational_decimal_fraction() -> IrrationalDecimalFraction {
-    IrrationalDecimalFraction{next: 1, curr: Vec::new()}
+    IrrationalDecimalFraction {
+        next: 1,
+        curr: Vec::new(),
+    }
 }
 
 pub fn solve() -> usize {
-    (1..).zip(irrational_decimal_fraction())
-        .filter(|&(i, _)| match i { 1 | 10 | 100 | 1000 | 10000 | 100000 | 1000000 => true, _ => false} )
-        .map(|(_, d)| d )
+    (1..)
+        .zip(irrational_decimal_fraction())
+        .filter(|&(i, _)| {
+            match i {
+                1 | 10 | 100 | 1000 | 10000 | 100000 | 1000000 => true,
+                _ => false,
+            }
+        })
+        .map(|(_, d)| d)
         .take(7)
         .prod()
 }

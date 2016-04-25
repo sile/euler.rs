@@ -15,24 +15,28 @@
 //!
 //! Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 //! ```
-//use utils::{self, Sum};
-use utils::{self,Sum};
+//! use utils::{self, Sum};
+use utils::{self, Sum};
 
 pub fn solve() -> usize {
     let limit = 28123;
     let abundants = abundant_numbers(limit);
-    (1..limit).filter(|&n| !is_writtern(n, &abundants) ).summation()
+    (1..limit).filter(|&n| !is_writtern(n, &abundants)).summation()
 }
 
 fn abundant_numbers(limit: usize) -> Vec<usize> {
-    (2..limit).map(|x| (x, utils::divisors(x).summation()) ).filter(|&(x,y)| x < y).map(|(x,_)| x).collect()
+    (2..limit)
+        .map(|x| (x, utils::divisors(x).summation()))
+        .filter(|&(x, y)| x < y)
+        .map(|(x, _)| x)
+        .collect()
 }
 
 fn is_writtern(n: usize, abundants: &Vec<usize>) -> bool {
     abundants.iter()
-        .filter(|&&x| x < n )
-        .any(|&x| {
-            let y = n - x;
-            abundants.binary_search_by(|z| z.cmp(&y) ).is_ok()
-        })
+             .filter(|&&x| x < n)
+             .any(|&x| {
+                 let y = n - x;
+                 abundants.binary_search_by(|z| z.cmp(&y)).is_ok()
+             })
 }

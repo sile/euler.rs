@@ -32,10 +32,10 @@ use num::One;
 
 pub fn solve() -> usize {
     let border = n_digits(1000);
-    utils::fibonacci::<BigUint>().position(|n| n >= border ).unwrap() + 2 // +1 for 1-based indexing. +1 for the fibonacci sequence where f(1)==1, f(2)==2, ...
+    utils::fibonacci::<BigUint>().position(|n| n >= border).unwrap() + 2 // +1 for 1-based indexing. +1 for the fibonacci sequence where f(1)==1, f(2)==2, ...
 }
 
 fn n_digits(n: usize) -> BigUint {
     let ten = BigUint::parse_bytes(b"10", 10).unwrap();
-    (1..n).fold(BigUint::one(), |a,_| a*&ten )
+    (1..n).fold(BigUint::one(), |a, _| a * &ten)
 }

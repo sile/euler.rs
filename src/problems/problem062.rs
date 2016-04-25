@@ -8,12 +8,12 @@ pub fn solve() -> u64 {
     for n in 1.. {
         let cube = cube(n);
         let key = digit_rsort(cube);
-        if ! cubes.contains_key(&key) {
+        if !cubes.contains_key(&key) {
             cubes.insert(key, vec![cube]);
         } else {
             cubes.get_mut(&key).unwrap().push(cube);
             if cubes.get(&key).unwrap().len() == 5 {
-                return cubes.get(&key).unwrap()[0]
+                return cubes.get(&key).unwrap()[0];
             }
         }
     }

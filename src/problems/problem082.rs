@@ -12,16 +12,18 @@ pub fn solve() -> usize {
 
     for col in 1..EDGE_SIZE {
         for row in 0..EDGE_SIZE {
-            table[row][col] = table[row][col-1] + matrix[row][col];
+            table[row][col] = table[row][col - 1] + matrix[row][col];
         }
 
         for _ in 0..EDGE_SIZE {
-            for row in 0..EDGE_SIZE-1 {
-                table[row+0][col] = cmp::min(table[row+0][col], table[row+1][col] + matrix[row+0][col]);
-                table[row+1][col] = cmp::min(table[row+1][col], table[row+0][col] + matrix[row+1][col]);
+            for row in 0..EDGE_SIZE - 1 {
+                table[row + 0][col] = cmp::min(table[row + 0][col],
+                                               table[row + 1][col] + matrix[row + 0][col]);
+                table[row + 1][col] = cmp::min(table[row + 1][col],
+                                               table[row + 0][col] + matrix[row + 1][col]);
             }
         }
     }
 
-    (0..EDGE_SIZE).map(|i| table[i][EDGE_SIZE-1] ).min().unwrap()
+    (0..EDGE_SIZE).map(|i| table[i][EDGE_SIZE - 1]).min().unwrap()
 }
