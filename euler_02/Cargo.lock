@@ -1,44 +1,5 @@
 [root]
-name = "euler"
-version = "0.1.0"
-dependencies = [
- "euler_00 0.1.0",
- "euler_01 0.1.0",
- "euler_02 0.1.0",
- "euler_03 0.1.0",
- "num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand 0.3.14 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "euler_00"
-version = "0.1.0"
-dependencies = [
- "euler_lib 0.1.0",
- "num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand 0.3.14 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "euler_01"
-version = "0.1.0"
-dependencies = [
- "euler_lib 0.1.0",
- "num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand 0.3.14 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "euler_02"
-version = "0.1.0"
-dependencies = [
- "euler_lib 0.1.0",
- "num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)",
- "rand 0.3.14 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "euler_03"
 version = "0.1.0"
 dependencies = [
  "euler_lib 0.1.0",

@@ -1,0 +1,9 @@
+[package]
+name = "euler_03"
+version = "0.1.0"
+authors = ["Takeru Ohta <phjgt308@gmail.com>"]
+
+[dependencies]
+num = "*"
+rand = "*"
+euler_lib = { path = "../euler_lib/" }
